@@ -25,13 +25,13 @@ const Header = () => {
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden sm:block">
+          <div className="hidden md:block">
             <Navigation />
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="sm:hidden p-2 text-muted hover:text-foreground transition-colors"
+            className="md:hidden p-2 text-muted hover:text-foreground transition-colors"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             aria-expanded={menuOpen}
@@ -44,8 +44,8 @@ const Header = () => {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="sm:hidden pb-3">
-            <Navigation />
+          <div className="md:hidden pb-3">
+            <Navigation onNavigate={() => setMenuOpen(false)} />
           </div>
         )}
       </div>

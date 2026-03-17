@@ -22,12 +22,9 @@ export default function CohortPage() {
           O que é análise de cohort?
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed">
-          Uma coorte é um grupo de clientes que fez a primeira compra no mesmo
-          mês. Acompanhamos cada grupo ao longo do tempo e medimos a proporção
-          que volta a comprar nos meses seguintes. O resultado é o heatmap
-          abaixo: linhas são as coortes, colunas são os meses desde a primeira
-          compra (M+0 é sempre 100%). A pergunta é: quanto dessa base inicial
-          permanece ativa?
+          Agrupamos clientes pelo mês da primeira compra (coorte) e medimos
+          quantos voltam nos meses seguintes. M+0 é sempre 100% — a pergunta é
+          quanto dessa base permanece ativa.
         </p>
       </section>
 
@@ -50,7 +47,10 @@ export default function CohortPage() {
           De 100% em M+0, a retenção despenca para 5–7% em M+1, depois para
           2–4% em M+2, e se estabiliza em torno de 0,3–0,5% a partir de M+6.
           Nenhuma coorte mostra recuperação significativa — o que era esperado
-          para um marketplace generalista.
+          para um marketplace generalista. A exceção parcial é novembro/2017
+          (Black Friday): a coorte é a maior em volume, mas a retenção segue o
+          mesmo padrão de queda — o evento atrai compradores de ocasião, não
+          clientes recorrentes.
         </Insight>
       </section>
 
@@ -60,7 +60,7 @@ export default function CohortPage() {
           Métricas gerais de recompra
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed mb-1">
-          Consolidando todas as coortes, menos de 7% dos clientes únicos
+          Consolidando todas as coortes, apenas 7% dos clientes únicos
           realizaram uma segunda compra em qualquer momento do dataset.
           Quem voltou levou em média 183 dias — mais de 6 meses — para fazê-lo.
         </p>
@@ -68,7 +68,7 @@ export default function CohortPage() {
         <RetentionSummary />
 
         <Insight>
-          <strong>A taxa de recompra de ~7% pode parecer baixa, mas conta uma
+          <strong>A taxa de recompra de 7% pode parecer baixa, mas conta uma
           história conhecida do marketplace.</strong> O cliente compra um
           colchão, fica satisfeito, mas não precisa de outro por anos. A
           retenção baixa não é necessariamente insatisfação — é a natureza do

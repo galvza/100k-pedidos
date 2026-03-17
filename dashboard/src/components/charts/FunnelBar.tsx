@@ -10,6 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
   Cell,
+  LabelList,
 } from "recharts";
 import { loadChapterData } from "@/lib/data";
 import type { FunilConversao } from "@/types";
@@ -42,7 +43,7 @@ const CustomTooltip = ({ active, payload }: TooltipPayload) => {
 
 /**
  * Barra horizontal mostrando pedidos por etapa do funil.
- * Barras normalizadas pela etapa base (Compra = 100%).
+ * Eixo X cortado em 94% para tornar as diferenças entre etapas legíveis.
  */
 export default function FunnelBar() {
   const [data, setData] = useState<Array<FunilConversao & { pct_base: number }> | null>(
@@ -70,42 +71,53 @@ export default function FunnelBar() {
   }
 
   return (
-    <div data-testid="funnel-bar" className="mt-4 h-52">
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart
-          data={data}
-          layout="vertical"
-          margin={{ top: 4, right: 80, bottom: 4, left: 72 }}
-        >
-          <CartesianGrid horizontal={false} stroke="#E5E7EB" strokeDasharray="3 3" />
-          <YAxis
-            dataKey="etapa"
-            type="category"
-            tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
-            width={68}
-            tickLine={false}
-            axisLine={false}
-          />
-          <XAxis
-            type="number"
-            domain={[0, 100]}
-            tickFormatter={(v: number) => `${v}%`}
-            tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
-            tickLine={false}
-            axisLine={false}
-          />
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: "#F3F4F6" }} />
-          <Bar dataKey="pct_base" radius={[0, 2, 2, 0]} barSize={28}>
-            {data.map((_, i) => (
-              <Cell
-                key={i}
-                fill={CHART_COLORS[0]}
-                opacity={1 - i * 0.15}
+    <div data-testid="funnel-bar" className="mt-4">
+      <div className="h-52">
+        <ResponsiveContainer width="100%" height="100%">
+          <BarChart
+            data={data}
+            layout="vertical"
+            margin={{ top: 4, right: 80, bottom: 4, left: 72 }}
+          >
+            <CartesianGrid horizontal={false} stroke="#E5E7EB" strokeDasharray="3 3" />
+            <YAxis
+              dataKey="etapa"
+              type="category"
+              tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
+              width={68}
+              tickLine={false}
+              axisLine={false}
+            />
+            <XAxis
+              type="number"
+              domain={[94, 100]}
+              tickFormatter={(v: number) => `${v}%`}
+              tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
+              tickLine={false}
+              axisLine={false}
+            />
+            <Tooltip content={<CustomTooltip />} cursor={{ fill: "#F3F4F6" }} />
+            <Bar dataKey="pct_base" radius={[0, 2, 2, 0]} barSize={28}>
+              {data.map((_, i) => (
+                <Cell
+                  key={i}
+                  fill={CHART_COLORS[0]}
+                  opacity={1 - i * 0.15}
+                />
+              ))}
+              <LabelList
+                dataKey="pct_base"
+                position="right"
+                formatter={(v: number) => `${v.toFixed(1)}%`}
+                style={{ fontSize: 11, fill: "#374151", fontFamily: "sans-serif" }}
               />
-            ))}
-          </Bar>
-        </BarChart>
-      </ResponsiveContainer>
+            </Bar>
+          </BarChart>
+        </ResponsiveContainer>
+      </div>
+      <p className="text-xs text-muted mt-1 italic">
+        Eixo X inicia em 94% para evidenciar as diferenças entre etapas.
+      </p>
     </div>
   );
 }

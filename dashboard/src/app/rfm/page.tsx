@@ -29,9 +29,17 @@ export default function RfmPage() {
           (há quantos dias fez a última compra),{" "}
           <strong>Frequência</strong> (quantas vezes comprou)
           e <strong>Valor Monetário</strong> (quanto gastou no total). Cada
-          dimensão recebe uma nota de 1 a 5, gerando um score combinado que
-          posiciona o cliente em um dos segmentos abaixo.
+          dimensão recebe uma nota de 1 a 5 (por quartis), e o score final é a
+          soma das três notas (3–15).
         </p>
+
+        <Callout variant="note" title="Base de análise: 89.265 clientes">
+          O dataset possui 96.461 clientes únicos, mas a análise RFM considera
+          apenas 89.265 — aqueles com pelo menos um pedido entregue e datas
+          válidas. Clientes com pedidos cancelados ou sem entrega confirmada
+          foram excluídos para garantir que Recência e Valor Monetário reflitam
+          comportamento real de compra.
+        </Callout>
 
         <RfmSegmentChart />
 
@@ -39,7 +47,7 @@ export default function RfmPage() {
           <strong>Um em cada três clientes nunca mais voltou.</strong>{" "}
           O segmento &ldquo;Perdidos&rdquo; concentra 34% da base — compraram
           há mais de 480 dias e não retornaram. No extremo oposto, os
-          Campeões (8,5%) gastam em média R$ 612 por cliente — quase 7× mais
+          Campeões (8,5%) gastam em média R$ 612 por cliente — ~7× mais
           do que os Perdidos (R$ 92). O desafio do marketplace é transformar
           compradores ocasionais em recorrentes.
         </Insight>
@@ -108,12 +116,13 @@ export default function RfmPage() {
           Manual vs Automático — qual usar?
         </h2>
         <p className="font-sans text-sm text-muted leading-relaxed">
-          As duas abordagens são complementares. A segmentação manual (por
-          quartis) é interpretável e diretamente acionável: cada segmento tem
-          nome, critério claro e estratégia de marketing associada. Já o
-          K-Means descobre estruturas sem pressupostos — útil para validar se
-          os segmentos manuais fazem sentido nos dados ou para revelar subgrupos
-          não óbvios.
+          As duas abordagens são complementares. A segmentação manual atribui
+          nota 1–5 para cada dimensão (por quartis da distribuição) e soma as
+          três notas num score de 3 a 15 — por exemplo, um cliente com R=5,
+          F=4, M=5 tem score 14 e entra em &ldquo;Campeões&rdquo;. É
+          interpretável e diretamente acionável. Já o K-Means descobre
+          agrupamentos sem pressupostos — útil para validar se os segmentos
+          manuais fazem sentido nos dados ou para revelar subgrupos não óbvios.
         </p>
 
         <Callout variant="info" title="Convergência dos métodos">

@@ -26,6 +26,8 @@ vi.mock("recharts", () => ({
   Legend: () => null,
   Cell: () => null,
   ReferenceLine: () => null,
+  Label: () => null,
+  LabelList: () => null,
 }));
 
 vi.mock("@/lib/data", () => ({

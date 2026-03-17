@@ -30,7 +30,7 @@ const CustomTooltip = ({ active, payload, label }: TooltipPayload) => {
         Tempo médio:{" "}
         <span className="font-medium">
           {dias === 0
-            ? "referência"
+            ? "ponto de partida"
             : dias < 1
               ? `~${Math.round(dias * 24)} horas`
               : `${dias.toFixed(1)} dias`}
