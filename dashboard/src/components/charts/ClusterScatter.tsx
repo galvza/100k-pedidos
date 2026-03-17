@@ -66,13 +66,13 @@ export default function ClusterScatter() {
     return <p className="text-muted text-sm mt-4">Sem dados de cluster disponíveis.</p>;
   }
 
-  // Normaliza contagem para o range de tamanho das bolhas
+  // Normaliza contagem para o range de tamanho das bolhas (sqrt para área proporcional)
   const maxCount = Math.max(...profiles.map((p) => p.contagem));
   const scatterData = profiles.map((p) => ({
     ...p,
     x: p.recencia_media,
     y: p.monetario_medio,
-    z: (p.contagem / maxCount) * 100,
+    z: (Math.sqrt(p.contagem) / Math.sqrt(maxCount)) * 100,
   }));
 
   return (

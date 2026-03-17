@@ -10,6 +10,7 @@ import {
   Tooltip,
   ReferenceLine,
   ResponsiveContainer,
+  Label,
 } from "recharts";
 import { loadChapterData } from "@/lib/data";
 import type { RfmClustering } from "@/types";
@@ -76,8 +77,16 @@ export default function ElbowChart() {
             tick={{ fontSize: CHART_CONFIG.fontSizeAxis, fill: MUTED_COLOR }}
             tickLine={false}
             axisLine={false}
-            width={40}
-          />
+            width={50}
+          >
+            <Label
+              value="Dispersão interna (menor = melhor)"
+              angle={-90}
+              position="insideLeft"
+              offset={10}
+              style={{ fontSize: 10, fill: MUTED_COLOR }}
+            />
+          </YAxis>
           <Tooltip content={<CustomTooltip />} />
           {data.k_otimo !== null && (
             <ReferenceLine

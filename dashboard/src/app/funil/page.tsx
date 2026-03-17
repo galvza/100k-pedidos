@@ -55,10 +55,12 @@ export default function FunilPage() {
         <TimelineChart />
 
         <Insight>
-          <strong>O pagamento é aprovado em ~10 horas; a entrega leva 12 dias.</strong>{" "}
-          Da aprovação até o cliente receber, passam em média 14,6 dias. A
-          automação dos gateways de pagamento resolveu a velocidade financeira —
-          o desafio logístico de um país continental, ainda não.
+          <strong>O pagamento é aprovado em ~10 horas; a entrega leva 12 dias
+          após o envio.</strong>{" "}
+          O tempo total da aprovação até o recebimento é de 14,6 dias — a soma
+          de 2,6 dias até o despacho e 12 dias em trânsito. A automação dos
+          gateways de pagamento resolveu a velocidade financeira — o desafio
+          logístico de um país continental, ainda não.
         </Insight>
       </section>
 

@@ -21,7 +21,7 @@ const CHAPTER_META: Record<
   cohort: {
     num: "03",
     description:
-      "A taxa de recompra de 3% parece baixa — mas conta uma história conhecida do marketplace.",
+      "A taxa de recompra de 7% conta uma história conhecida do marketplace.",
     tecnicas: ["Subqueries encadeadas", "Pivot", "Retenção"],
   },
   geografico: {
@@ -45,25 +45,15 @@ const CHAPTER_META: Record<
 };
 
 const STATS = [
-  { value: "99.441", label: "pedidos analisados" },
+  { value: "99.441", label: "pedidos analisados", sub: "de set/2016 a out/2018" },
   { value: "9", label: "tabelas relacionais" },
   { value: "6", label: "capítulos analíticos" },
   { value: "2016–2018", label: "período coberto" },
 ];
 
-const SKILLS = [
-  {
-    area: "SQL",
-    items: ["DuckDB", "JOINs complexos", "Subqueries encadeadas", "Funções analíticas", "Agregações"],
-  },
-  {
-    area: "Python",
-    items: ["pandas", "scipy", "scikit-learn", "statsmodels", "pytest"],
-  },
-  {
-    area: "Frontend",
-    items: ["Next.js 14", "TypeScript", "Recharts", "Tailwind CSS", "Vitest"],
-  },
+const SKILL_BADGES = [
+  "DuckDB", "SQL analítico", "Python", "pandas", "scipy",
+  "scikit-learn", "Next.js 14", "TypeScript", "Recharts", "Tailwind CSS",
 ];
 
 export default function Home() {
@@ -91,9 +81,24 @@ export default function Home() {
             respondida com dados.
           </p>
 
+          {/* Skills como badges no hero */}
+          <div className="mt-6 flex flex-wrap gap-2">
+            {SKILL_BADGES.map((s) => (
+              <TechBadge key={s} label={s} />
+            ))}
+          </div>
+
+          {/* CTA */}
+          <a
+            href="#capitulos"
+            className="inline-block mt-8 px-6 py-3 bg-accent text-white font-sans text-sm font-medium rounded hover:bg-accent/90 transition-colors"
+          >
+            Explorar os capítulos
+          </a>
+
           {/* Stats */}
           <dl className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
-            {STATS.map(({ value, label }) => (
+            {STATS.map(({ value, label, sub }) => (
               <div
                 key={label}
                 className="bg-white border border-border rounded px-4 py-4"
@@ -104,14 +109,49 @@ export default function Home() {
                 <dd className="font-serif text-2xl sm:text-3xl font-bold text-primary mt-1">
                   {value}
                 </dd>
+                {sub && (
+                  <dd className="font-sans text-xs text-muted mt-0.5">{sub}</dd>
+                )}
               </div>
             ))}
           </dl>
         </div>
       </section>
 
+      {/* Sobre — movido antes dos capítulos */}
+      <section className="border-b border-border bg-surface">
+        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-6">
+            Sobre o projeto
+          </h2>
+          <div className="max-w-3xl space-y-4 font-sans text-base text-foreground leading-relaxed">
+            <p>
+              O dataset <strong>Olist Brazilian E-Commerce</strong> é público,
+              real e tem 99.441 pedidos realizados entre setembro de 2016 e
+              outubro de 2018 no maior marketplace brasileiro. São 9 tabelas
+              relacionais com informações de pedidos, produtos, clientes,
+              vendedores, pagamentos e avaliações.
+            </p>
+            <p>
+              Este projeto demonstra o pipeline completo de um analista de dados:
+              ingestão dos CSVs no DuckDB, queries SQL analíticas para extrair
+              indicadores de cada capítulo, análises em Python com testes de
+              hipótese, clustering K-Means e modelo preditivo, e por fim a
+              visualização interativa neste dashboard. Todo o código é testado,
+              documentado e reproduzível.
+            </p>
+            <p>
+              O objetivo não é apenas mostrar gráficos — é contar a história
+              que os dados revelam sobre o e-commerce brasileiro: onde estão os
+              gargalos, quem são os clientes, o que determina a satisfação e
+              como o tempo e a geografia moldam o consumo online no Brasil.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Chapter grid */}
-      <section className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section id="capitulos" className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-2">
           Capítulos
         </h2>
@@ -151,61 +191,6 @@ export default function Home() {
               </Link>
             );
           })}
-        </div>
-      </section>
-
-      {/* Sobre */}
-      <section className="border-t border-border bg-surface">
-        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-6">
-            Sobre o projeto
-          </h2>
-          <div className="max-w-3xl space-y-4 font-sans text-base text-foreground leading-relaxed">
-            <p>
-              O dataset <strong>Olist Brazilian E-Commerce</strong> é público,
-              real e tem 99.441 pedidos realizados entre setembro de 2016 e
-              outubro de 2018 no maior marketplace brasileiro. São 9 tabelas
-              relacionais com informações de pedidos, produtos, clientes,
-              vendedores, pagamentos e avaliações.
-            </p>
-            <p>
-              Este projeto demonstra o pipeline completo de um analista de dados:
-              ingestão dos CSVs no DuckDB, queries SQL analíticas para extrair
-              indicadores de cada capítulo, análises em Python com testes de
-              hipótese, clustering K-Means e modelo preditivo, e por fim a
-              visualização interativa neste dashboard. Todo o código é testado,
-              documentado e reproduzível.
-            </p>
-            <p>
-              O objetivo não é apenas mostrar gráficos — é contar a história
-              que os dados revelam sobre o e-commerce brasileiro: onde estão os
-              gargalos, quem são os clientes, o que determina a satisfação e
-              como o tempo e a geografia moldam o consumo online no Brasil.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Skills */}
-      <section className="border-t border-border">
-        <div className="max-w-content mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-primary mb-8">
-            Skills demonstradas
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {SKILLS.map(({ area, items }) => (
-              <div key={area}>
-                <h3 className="font-sans text-xs font-semibold text-muted uppercase tracking-widest mb-3">
-                  {area}
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {items.map((item) => (
-                    <TechBadge key={item} label={item} />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
     </main>

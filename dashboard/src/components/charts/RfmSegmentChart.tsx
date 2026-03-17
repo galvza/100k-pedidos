@@ -102,7 +102,7 @@ export default function RfmSegmentChart() {
             axisLine={false}
           />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: "#F3F4F6" }} />
-          <Bar dataKey="contagem" radius={[0, 2, 2, 0]} barSize={28}>
+          <Bar dataKey="contagem" radius={[0, 2, 2, 0]} barSize={28} isAnimationActive={false}>
             {sorted.map((entry) => (
               <Cell
                 key={entry.segmento}
