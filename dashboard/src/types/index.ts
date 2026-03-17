@@ -32,6 +32,11 @@ export interface FunilTempos {
 // Cap. 2 — Segmentação RFM
 // ------------------------------------------------------------------ //
 
+export interface RfmHistogramBin {
+  faixa: string;
+  contagem: number;
+}
+
 export interface RfmDimStats {
   min: number;
   max: number;
@@ -40,6 +45,7 @@ export interface RfmDimStats {
   std: number;
   q1: number;
   q3: number;
+  histograma?: RfmHistogramBin[];
 }
 
 export interface RfmDistribuicao {
@@ -70,6 +76,15 @@ export interface RfmSilhouetteItem {
   silhouette: number;
 }
 
+export interface RfmClusterProfile {
+  cluster: number;
+  label: string;
+  recencia_media: number;
+  frequencia_media: number;
+  monetario_medio: number;
+  contagem: number;
+}
+
 export interface RfmClustering {
   k_otimo: number | null;
   n_original: number;
@@ -77,6 +92,7 @@ export interface RfmClustering {
   elbow: RfmClusteringItem[];
   silhouette: RfmSilhouetteItem[];
   centroids?: number[][];
+  cluster_profiles?: RfmClusterProfile[];
 }
 
 // ------------------------------------------------------------------ //
