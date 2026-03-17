@@ -4,7 +4,7 @@
 
 Pipeline completo de análise de dados — SQL analítico avançado (DuckDB) → Python (estatística e ML) → visualização interativa (Next.js + Recharts) — usando dados reais de 100k pedidos do marketplace brasileiro Olist.
 
-**[Ver dashboard ao vivo →](https://ecommerce.seudominio.com)**
+**[Ver dashboard ao vivo →](100kpedidos.gsdigitais.com)**
 
 ---
 
